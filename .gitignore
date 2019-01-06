@@ -1,0 +1,7 @@
+*.sublime-project
+*.sublime-workspace
+assets_src
+node_modules
+dist
+*.log
+.idea/*

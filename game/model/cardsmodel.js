@@ -9,7 +9,7 @@ CardsModel = function () {
     var playerOneCards = [];
     var playerTwoCards = [];
     var playerOneWin = false;
-    var playCount = 0
+    var playCount = 0;
 
     this.prepareDeck = function(){
 
@@ -18,7 +18,7 @@ CardsModel = function () {
               cardStack.push({symbol:symbol, value:value});
           });
       });
-      
+
       cardStack = Phaser.ArrayUtils.shuffle(cardStack);
       this.distributeShuffledCards();
     };
@@ -93,5 +93,14 @@ CardsModel = function () {
          playCount++;
     };
 
-	this.prepareDeck();	
+    this.checkWinner = function () {
+        if(playerOneCards.length > 0){
+            return "Congrats :: Player One Wins!!"
+        } else if(playerTwoCards.length > 0) {
+            return "Congrats :: Player Two Wins!!"
+        }
+
+    };
+
+	this.prepareDeck();
 };

@@ -1,32 +1,34 @@
-
 'use strict';
-function GameOver() {}
+require('../model/cardsmodel');
+function GameOver() {
+}
 
 GameOver.prototype = {
-  preload: function () {
+    preload: function () {
 
-  },
+    },
 
-  init: function(finalBalance){
-    this.finalBalance = finalBalance;
-  },
+    init: function (finalBalance) {
+        this.finalBalance = finalBalance;
+    },
 
-  create: function () {
-    this.table = this.game.add.tileSprite(0, 0, 800, 600, 'assets', 'table');    
+    create: function () {
+        this.cardsModel = new CardsModel();
+        this.table = this.game.add.tileSprite(0, 0, 800, 600, 'assets', 'table');
 
-    this.cards = this.game.add.image(this.game.world.centerX, 280, 'assets', 'cards');
-    this.cards.anchor.setTo(0.5, 0.5);
+        this.cards = this.game.add.image(this.game.world.centerX, 280, 'assets', 'cards');
+        this.cards.anchor.setTo(0.5, 0.5);
 
-    var style = { font: '35px Arial', fill: '#000000', align: 'center'};
-    this.titleText = this.game.add.text(this.game.world.centerX, 420, 'Your final balance: '+ this.finalBalance + '\nClick to play again!', style);
-    this.titleText.anchor.setTo(0.5, 0.5);
-  },
+        var style = {font: '35px Arial', fill: '#000000', align: 'center'};
+        this.titleText = this.game.add.text(this.game.world.centerX, 420, this.cardsModel.checkWinner() + '\nClick to play again!', style);
+        this.titleText.anchor.setTo(0.5, 0.5);
+    },
 
 
-  update: function () {
-    if(this.game.input.activePointer.justPressed()) {
-      this.game.state.start('play');
+    update: function () {
+        if (this.game.input.activePointer.justPressed()) {
+            this.game.state.start('play');
+        }
     }
-  }
 };
 module.exports = GameOver;
